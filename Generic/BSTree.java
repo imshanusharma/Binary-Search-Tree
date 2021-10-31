@@ -4,6 +4,40 @@ package BinarySearchTree;
 
 public class BSTree<K extends Comparable<K>, V> {
     private Node root;
+
+    // InOrder traversal
+    public void inOrder() {
+        inOrder(root);
+    }
+    public void inOrder(Node node) {
+        if(node == null)
+            return;
+        inOrder(node.left);
+        System.out.print(node.key + " ");
+        inOrder(node.right);
+    }
+    // preOrder traversal
+    public void preOrder() {
+        preOrder(root);
+    }
+    public void preOrder(Node node) {
+        if(node == null)
+            return;
+        System.out.print(node.key + " ");
+        preOrder(node.left);
+        preOrder(node.right);
+    }
+    // postOrder traversal
+    public void postOrder() {
+        postOrder(root);
+    }
+    public void postOrder(Node node) {
+        if(node == null)
+            return;
+        postOrder(node.left);
+        postOrder(node.right);
+        System.out.print(node.key + " ");
+    }
     // Height of Tree
     public int height() {
         return height(root);
