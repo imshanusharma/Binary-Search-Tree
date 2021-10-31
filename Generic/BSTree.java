@@ -4,7 +4,40 @@ package BinarySearchTree;
 
 public class BSTree<K extends Comparable<K>, V> {
     private Node root;
-
+    // Height of Tree
+    public int height() {
+        return height(root);
+    }
+    private int height(Node node) {
+        if(node == null)
+            return 0;
+        return 1 + Math.max(height(node.left), height(node.right));
+    }
+    // Deletion
+    public void delete(K key) {
+        root = delete(key, root);
+    }
+    private Node delete(K key, Node node) {
+        if(node == null)
+            return null;
+        int cmp = key.compareTo(node.key);
+        if(cmp > 0) {
+            return delete(key, node.right);
+        }
+        else if(cmp < 0) {
+            return delete(key, node.left);
+        }
+        if(node.right == null) {
+            return node.left;
+        }
+        else if(node.left == null) {
+            return node.right;
+        }
+        Node x = min(node.right);
+        x.right = removeMin(node.right);
+        x.left = node.left;
+        return x;
+    }
     // Max element
     public K max() {
         return max(root).key;
